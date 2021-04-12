@@ -1,0 +1,54 @@
+void main() {
+  List<Product> productList = [
+    Product(1, 'fruit', 50),
+    Product(2, 'cheese', 30),
+    Product(3, 'Beans', 20),
+    Product(4, 'vegitables', 20),
+  ];
+  //Adding new products
+  Product newProduct = Product(5, 'onion', 20);
+   print(addNewProduct(newProduct, productList,'mohamed'));
+  print('_____________');
+  print(editThePrice('vegitables', 70, productList,'mohamed'));
+    print('_____________');
+  deleteDefinitProduct('Beans', productList,"mohamed");
+}
+
+
+class Product {
+  int productID;
+  String productName;
+  int productPrice;
+  Product(this.productID, this.productName, this.productPrice);
+  @override
+  toString() => '$productID, $productName, $productPrice';
+}
+
+///أضافة صنف جديد
+String addNewProduct(Product newProduct, List<Product> listOfProduct, String userName) {
+  listOfProduct.add(newProduct);
+  return 'the list is $listOfProduct, and who did that add is $userName';
+}
+
+//التعديل علي صنف موجود (السعر)
+String editThePrice(
+    String productName, int editedPrice, List<Product> editablelist, String userName) {
+  for (Product product in editablelist) {
+    if (productName == product.productName) {
+      editablelist[product.productID - 1].productPrice = editedPrice;
+      return 'this is an edited list $editablelist,and who did that add is $userName';
+    }
+  }
+}
+deleteDefinitProduct(String productfordelete, List<Product> editablelist, String userName) {
+  int count = 0;
+  int index = 0;
+  for (Product product in editablelist) {
+    count++;
+    if (product.productName == productfordelete) {
+      index = count;
+    }
+  }
+  editablelist.removeAt(index - 1);
+  print("the editablelist is $editablelist, and who did that add is $userName");
+}
